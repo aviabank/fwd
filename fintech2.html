@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AviaForward (€FWD) — Mechanics & Token-2022 Gates</title>
+<link rel="icon" href="fwd_logo.png" />
+<link rel="stylesheet" href="ai-agent.css" />
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', system-ui, sans-serif; background: radial-gradient(ellipse at top, #2A1B3D 0%, #0A0E27 50%, #060920 100%); color: #E0E6FF; line-height: 1.6; padding: 40px 0 80px; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+.header-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px; flex-wrap: wrap; gap: 12px; }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; }
+.logo img { height: 40px; width: auto; border-radius: 50%; box-shadow: 0 0 20px rgba(155,89,182,0.5); }
+.logo span { font-size: 20px; font-weight: 700; }
+.back-btn { color: #8A94C8; text-decoration: none; font-size: 13px; padding: 8px 16px; border: 1px solid #2A2F5A; border-radius: 20px; transition: 0.3s; }
+.back-btn:hover { border-color: #9B59B6; color: #9B59B6; }
+
+.section-header { text-align: center; margin-bottom: 40px; }
+.section-tag { display: inline-block; background: rgba(155,89,182,0.12); color: #9B59B6; padding: 4px 16px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; border: 1px solid rgba(155,89,182,0.2); }
+.section-header h1 { font-size: 36px; font-weight: 700; margin: 8px 0; }
+.section-header h1 .highlight { color: #9B59B6; }
+.section-header p { color: #8A94C8; max-width: 700px; margin: 0 auto; font-size: 15px; }
+
+.mechanics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-bottom: 40px; }
+.mech-card { background: linear-gradient(160deg, rgba(26,30,65,0.6), rgba(42,27,61,0.6)); border: 1px solid rgba(155,89,182,0.2); border-radius: 18px; padding: 24px 20px; transition: 0.3s; }
+.mech-card:hover { border-color: #9B59B6; transform: translateY(-4px); box-shadow: 0 20px 40px rgba(155,89,182,0.2); }
+.mech-card .icon { font-size: 34px; margin-bottom: 10px; filter: drop-shadow(0 0 12px rgba(155,89,182,0.5)); }
+.mech-card h3 { color: #fff; font-size: 16px; margin-bottom: 8px; }
+.mech-card p { color: #8A94C8; font-size: 13px; line-height: 1.7; }
+
+.specs-block { max-width: 900px; margin: 30px auto; background: linear-gradient(160deg, rgba(26,30,65,0.7), rgba(42,27,61,0.7)); border: 2px solid rgba(155,89,182,0.3); border-radius: 20px; padding: 28px; }
+.specs-block h3 { color: #9B59B6; font-size: 18px; margin-bottom: 18px; text-align: center; }
+.spec-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(155,89,182,0.1); font-size: 14px; gap: 12px; flex-wrap: wrap; }
+.spec-row:last-child { border-bottom: none; }
+.spec-row .label { color: #8A94C8; }
+.spec-row .value { color: #fff; font-family: 'Courier New', monospace; text-align: right; word-break: break-all; font-weight: 600; }
+.spec-row .value.good { color: #2ECC40; }
+.spec-row .value.warn { color: #FFA500; }
+
+.gates-block { max-width: 900px; margin: 30px auto; }
+.gates-block h3 { color: #9B59B6; font-size: 18px; margin-bottom: 20px; text-align: center; }
+.gate-item { display: flex; gap: 16px; padding: 18px 20px; background: rgba(26,30,65,0.6); border: 1px solid rgba(155,89,182,0.25); border-radius: 16px; margin-bottom: 12px; align-items: flex-start; }
+.gate-item .gate-num { flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #9B59B6, #C39BD3); color: #fff; font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+.gate-item .gate-content { flex: 1; }
+.gate-item .gate-title { color: #fff; font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.gate-item .gate-desc { color: #8A94C8; font-size: 13px; line-height: 1.6; }
+.gate-item .gate-code { font-family: 'Courier New', monospace; font-size: 11px; color: #C39BD3; background: rgba(155,89,182,0.1); padding: 4px 10px; border-radius: 6px; margin-top: 8px; display: inline-block; }
+
+.info-block { max-width: 800px; margin: 30px auto; background: rgba(155,89,182,0.05); border: 1px solid rgba(155,89,182,0.2); border-radius: 16px; padding: 22px; }
+.info-block h3 { color: #9B59B6; font-size: 16px; margin-bottom: 12px; }
+.info-block p { color: #8A94C8; font-size: 13px; line-height: 1.7; margin-bottom: 8px; }
+.info-block code { background: rgba(155,89,182,0.1); color: #C39BD3; padding: 2px 8px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 12px; }
+
+.back-link { display: inline-block; margin-top: 24px; color: #9B59B6; text-decoration: none; font-weight: 500; }
+.back-link:hover { text-decoration: underline; }
+.center { text-align: center; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header-bar">
+    <a href="index.html" class="logo">
+      <img src="fwd_logo.png" alt="AviaForward" />
+      <span>FWD</span>
+    </a>
+    <a href="index.html" class="back-btn">← Back to Home</a>
+  </div>
+
+  <div class="section-header">
+    <span class="section-tag">⚙️ Mechanics</span>
+    <h1>How <span class="highlight">AviaForward</span> Works On-Chain</h1>
+    <p>Token-2022 on Solana. Three-layer audit gate enforced by Transfer Hook.</p>
+  </div>
+
+  <div class="mechanics-grid">
+
+    <div class="mech-card">
+      <div class="icon">🔗</div>
+      <h3>Token-2022 Standard</h3>
+      <p>Modern Solana token standard with extensions: Transfer Fee, Transfer Hook, Non-Transferable, Metadata.</p>
+    </div>
+
+    <div class="mech-card">
+      <div class="icon">💸</div>
+      <h3>1% Transfer Fee</h3>
+      <p>Every transfer allocates 1% to the AviaTrust treasury + insurance pool.</p>
+    </div>
+
+    <div class="mech-card">
+      <div class="icon">🪝</div>
+      <h3>Transfer Hook</h3>
+      <p>Custom on-chain program runs BEFORE every transfer. Verifies €PROOF validity, €CERT stake, and audit freshness.</p>
+    </div>
+
+    <div class="mech-card">
+      <div class="icon">🔒</div>
+      <h3>Mint Authority</h3>
+      <p>Disabled after initial mint. Fixed supply, no inflation.</p>
+    </div>
+
+    <div class="mech-card">
+      <div class="icon">❄️</div>
+      <h3>Freeze Authority</h3>
+      <p>Disabled. No one can freeze your tokens — but Transfer Hook can still block invalid transfers.</p>
+    </div>
+
+    <div class="mech-card">
+      <div class="icon">📜</div>
+      <h3>On-Chain Metadata</h3>
+      <p>Forward terms (price, expiry, aircraft token, settlement type) stored in Metaplex metadata.</p>
+    </div>
+
+  </div>
+
+  <div class="specs-block">
+    <h3>📋 AviaForward Token Specifications</h3>
+    <div class="spec-row">
+      <span class="label">Token Name</span>
+      <span class="value">AviaForward</span>
+    </div>
+    <div class="spec-row">
+      <span class="label">Symbol</span>
+      <span class="value">€FWD / FWD</span>
+    </div>
+    <div class="spec-row">
+      <span class="label">Contract</span>
+      <span class="value">Eddd5iW7RWhkNd4JWUjgK9TByeSkdWELgDg4rmimZkBA</span>
+    </div>
+    <div class="spec-row">
+      <span class="label">Pool (Meteora DAMM V2)</span>
+      <span class="value">4ivvUsgGixdoWasY8EYLcYENKZ1GuozBuaVXHBz4bDKf</span>
+    </div>
+    <div class="spec-row">
+      <span class="label">Chain</span>
+      <span class="value">Solana</span>
+    </div>
+    <div class="spec-row">
+      <span class="label">Token Standard</span>
+      <span class="value">Token-2022</span>
+    </div>
+    <div class="spec-row">
+      <span class="label">Transfer Fee</span>
+      <span class="value warn">1%</span>
+    </div>
+    <div class="spec-row">
+      <span class="label">Transfer Hook</span>
+      <span class="value warn">ENABLED (audit gate)</span>
+    </div>
+    <div class="spec-row">
+      <span class="label">Decimals</span>
+      <span class="value">9</span>
+    </div>
+    <div class="spec-row">
+      <span class="label">Mint Authority</span>
+      <span class="value good">DISABLED</span>
+    </div>
+    <div class="spec-row">
+      <span class="label">Freeze Authority</span>
+      <span class="value good">DISABLED</span>
+    </div>
+    <div class="spec-row">
+      <span class="label">Launch Price</span>
+      <span class="value">$0.01</span>
+    </div>
+  </div>
+
+  <div class="gates-block">
+    <h3>🛡️ Three Audit Gates (Transfer Hook Enforced)</h3>
+
+    <div class="gate-item">
+      <div class="gate-num">1</div>
+      <div class="gate-content">
+        <div class="gate-title">€AUDT — Burn on Creation</div>
+        <div class="gate-desc">Every €FWD is minted only after X €AUDT has been burned for the underlying aircraft audit. No burn → no mint.</div>
+        <div class="gate-code">burn(AUDT, amount) → mint(FWD, forward)</div>
+      </div>
+    </div>
+
+    <div class="gate-item">
+      <div class="gate-num">2</div>
+      <div class="gate-content">
+        <div class="gate-title">€PROOF — Verify on Transfer</div>
+        <div class="gate-desc">Every transfer of €FWD checks for valid €PROOF certificate. Expired certificate → transfer blocked. This prevents trading of un-audited forwards.</div>
+        <div class="gate-code">require(hasValidProof(sender, aircraft) == true)</div>
+      </div>
+    </div>
+
+    <div class="gate-item">
+      <div class="gate-num">3</div>
+      <div class="gate-content">
+        <div class="gate-title">€CERT — Stake Required</div>
+        <div class="gate-desc">Sender must have minimum €CERT staked. Anti-spam + skin in the game.</div>
+        <div class="gate-code">require(stakedCERT(sender) >= minStake)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-block">
+    <h3>⚠️ Legal Notice</h3>
+    <p>€FWD is a <strong>derivative instrument</strong>. Forwards are binding obligations — both sides must perform.</p>
+    <p>In some jurisdictions, on-chain derivatives may require registration or licensing. Users are responsible for compliance.</p>
+    <p>Contract: <code>Eddd5iW7RWhkNd4JWUjgK9TByeSkdWELgDg4rmimZkBA</code></p>
+  </div>
+
+  <div class="center">
+    <a href="fintech1.html" class="back-link" style="color:#9B59B6;">← Back to 4 Types</a>
+  </div>
+
+  <a href="index.html" class="back-link">← Back to €FWD Home</a>
+</div>
+
+<script src="counter.js"></script>
+<script src="ai-agent.js"></script>
+
+</body>
+</html>
