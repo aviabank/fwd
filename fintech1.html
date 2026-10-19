@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AviaForward (€FWD) — 4 Types of Forward Contracts</title>
+<link rel="icon" href="fwd_logo.png" />
+<link rel="stylesheet" href="ai-agent.css" />
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', system-ui, sans-serif; background: radial-gradient(ellipse at top, #2A1B3D 0%, #0A0E27 50%, #060920 100%); color: #E0E6FF; line-height: 1.6; padding: 40px 0 80px; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+.header-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px; flex-wrap: wrap; gap: 12px; }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; }
+.logo img { height: 40px; width: auto; border-radius: 50%; box-shadow: 0 0 20px rgba(155,89,182,0.5); }
+.logo span { font-size: 20px; font-weight: 700; }
+.back-btn { color: #8A94C8; text-decoration: none; font-size: 13px; padding: 8px 16px; border: 1px solid #2A2F5A; border-radius: 20px; transition: 0.3s; }
+.back-btn:hover { border-color: #9B59B6; color: #9B59B6; }
+
+.section-header { text-align: center; margin-bottom: 40px; }
+.section-tag { display: inline-block; background: rgba(155,89,182,0.12); color: #9B59B6; padding: 4px 16px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; border: 1px solid rgba(155,89,182,0.2); }
+.section-header h1 { font-size: 36px; font-weight: 700; margin: 8px 0; }
+.section-header h1 .highlight { color: #9B59B6; }
+.section-header p { color: #8A94C8; max-width: 700px; margin: 0 auto; font-size: 15px; }
+
+.models-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 40px; }
+.model-card { background: linear-gradient(160deg, rgba(26,30,65,0.7), rgba(42,27,61,0.7)); border: 2px solid rgba(155,89,182,0.2); border-radius: 20px; padding: 28px 24px; transition: 0.4s; position: relative; }
+.model-card:hover { border-color: #9B59B6; transform: translateY(-6px); box-shadow: 0 25px 60px rgba(155,89,182,0.25); }
+.model-card .num { position: absolute; top: 16px; right: 20px; font-size: 42px; font-weight: 800; color: rgba(155,89,182,0.15); line-height: 1; }
+.model-card .icon { font-size: 38px; margin-bottom: 12px; filter: drop-shadow(0 0 15px rgba(155,89,182,0.6)); }
+.model-card h3 { color: #fff; font-size: 19px; margin-bottom: 10px; }
+.model-card .tagline { color: #9B59B6; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
+.model-card p { color: #8A94C8; font-size: 13px; line-height: 1.7; margin-bottom: 12px; }
+.model-card ul { list-style: none; padding: 14px; background: rgba(0,0,0,0.3); border-radius: 12px; margin-top: 12px; }
+.model-card ul li { color: #E0E6FF; font-size: 12px; padding: 5px 0; display: flex; align-items: flex-start; gap: 8px; }
+.model-card ul li::before { content: '✓'; color: #9B59B6; font-weight: 700; flex-shrink: 0; }
+
+.info-block { max-width: 900px; margin: 30px auto; background: rgba(155,89,182,0.05); border: 1px solid rgba(155,89,182,0.2); border-radius: 16px; padding: 22px; }
+.info-block h3 { color: #9B59B6; font-size: 16px; margin-bottom: 12px; }
+.info-block p { color: #8A94C8; font-size: 13px; line-height: 1.7; margin-bottom: 8px; }
+.info-block code { background: rgba(155,89,182,0.1); color: #C39BD3; padding: 2px 8px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 12px; }
+
+.back-link { display: inline-block; margin-top: 24px; color: #9B59B6; text-decoration: none; font-weight: 500; }
+.back-link:hover { text-decoration: underline; }
+.center { text-align: center; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header-bar">
+    <a href="index.html" class="logo">
+      <img src="fwd_logo.png" alt="AviaForward" />
+      <span>FWD</span>
+    </a>
+    <a href="index.html" class="back-btn">← Back to Home</a>
+  </div>
+
+  <div class="section-header">
+    <span class="section-tag">📅 Forward Models</span>
+    <h1>4 Types of <span class="highlight">Aircraft Forward</span></h1>
+    <p>Aircraft forward contracts come in different structures. AviaForward supports all four — each fits a different aviation financing scenario.</p>
+  </div>
+
+  <div class="models-grid">
+
+    <div class="model-card">
+      <div class="num">01</div>
+      <div class="icon">📅</div>
+      <h3>Fixed-Date Forward</h3>
+      <div class="tagline">Standard forward</div>
+      <p>Buyer and seller agree on a price today for delivery on a specific future date. Both sides are obligated.</p>
+      <ul>
+        <li>Delivery date locked</li>
+        <li>Price locked</li>
+        <li>Both parties obligated</li>
+        <li>Cash or physical settlement</li>
+      </ul>
+    </div>
+
+    <div class="model-card">
+      <div class="num">02</div>
+      <div class="icon">🔄</div>
+      <h3>Cash-Settled Forward</h3>
+      <div class="tagline">No physical delivery</div>
+      <p>At expiry, the difference between spot and forward price is settled in cash. Used when physical delivery is impractical.</p>
+      <ul>
+        <li>No aircraft delivery</li>
+        <li>Cash difference paid</li>
+        <li>Easier to trade</li>
+        <li>Lower operational cost</li>
+      </ul>
+    </div>
+
+    <div class="model-card">
+      <div class="num">03</div>
+      <div class="icon">🔀</div>
+      <h3>Flexible-Date Forward</h3>
+      <div class="tagline">Window delivery</div>
+      <p>Delivery can occur within a window of dates (e.g. Q2 2028). Price is fixed, but delivery date is flexible.</p>
+      <ul>
+        <li>Delivery window locked</li>
+        <li>Price fixed</li>
+        <li>More flexibility</li>
+        <li>Common for aircraft</li>
+      </ul>
+    </div>
+
+    <div class="model-card">
+      <div class="num">04</div>
+      <div class="icon">💼</div>
+      <h3>Portfolio Forward</h3>
+      <div class="tagline">Multiple aircraft</div>
+      <p>Forward on a basket of aircraft — e.g. 3× €B787 + 2× €A350. Used for fleet-renewal planning.</p>
+      <ul>
+        <li>Multiple aircraft</li>
+        <li>Basket pricing</li>
+        <li>Fleet planning</li>
+        <li>Institutional size</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="info-block">
+    <h3>🔒 How AviaForward Is Different</h3>
+    <p>Traditional aircraft forwards are <strong>bilateral OTC contracts</strong> — hard to verify, hard to transfer, high counterparty risk.</p>
+    <p>€FWD is <strong>on-chain</strong>: price in metadata, collateral in €ESCR escrow, counterparty verified by €PROOF, settlement on Solana.</p>
+    <p>Contract: <code>Eddd5iW7RWhkNd4JWUjgK9TByeSkdWELgDg4rmimZkBA</code></p>
+  </div>
+
+  <div class="center">
+    <a href="fintech2.html" class="back-link" style="color:#9B59B6;">Explore Mechanics →</a>
+  </div>
+
+  <a href="index.html" class="back-link">← Back to €FWD Home</a>
+</div>
+
+<script src="counter.js"></script>
+<script src="ai-agent.js"></script>
+
+</body>
+</html>
